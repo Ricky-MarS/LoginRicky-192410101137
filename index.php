@@ -10,7 +10,7 @@ $koneksi    = mysqli_connect($host_db,$user_db,$pass_db,$nama_db);
 //atur variabel
 $err        = "";
 $username   = "";
-$ingataku   = "";
+$rememberme   = "";
 
 if(isset($_COOKIE['cookie_username'])){
     $cookie_username = $_COOKIE['cookie_username'];
@@ -33,7 +33,7 @@ if(isset($_SESSION['session_username'])){
 if(isset($_POST['login'])){
     $username   = $_POST['username'];
     $password   = $_POST['password'];
-    $ingataku   = $_POST['ingataku'];
+    $rememberme   = $_POST['rememberme'];
 
     if($username == '' or $password == ''){
         $err .= "<li>Silakan masukkan username dan juga password.</li>";
@@ -52,7 +52,7 @@ if(isset($_POST['login'])){
             $_SESSION['session_username'] = $username;
             $_SESSION['session_password'] = md5($password);
 
-            if($ingataku == 1){
+            if($rememberme == 1){
                 $cookie_name = "cookie_username";
                 $cookie_value = $username;
                 $cookie_time = time() + (60 * 60 * 24 * 30);
@@ -102,7 +102,7 @@ if(isset($_POST['login'])){
                     <div class="input-group">
                         <div class="checkbox">
                         <label>
-                            <input id="login-remember" type="checkbox" name="ingataku" value="1" <?php if($ingataku == '1') echo "checked"?>> Remember me
+                            <input id="login-remember" type="checkbox" name="rememberme" value="1" <?php if($rememberme == '1') echo "checked"?>> Remember me
                         </label>
                         </div>
                     </div>
